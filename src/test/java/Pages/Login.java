@@ -15,7 +15,7 @@ public class Login {
     WebElement txtPassword;
     @FindBy(id = "SubmitLogin")
     WebElement btnSubmitLogin;
-    @FindBy(xpath = "//span[contains(text(),'Test User')]")
+    @FindBy(xpath = "//span[contains(text(),'Samia NIra')]")
     WebElement lblUserName;
     @FindBy(xpath = "//li[contains(text(),'Authentication failed.')]")
     WebElement lblAuthError;

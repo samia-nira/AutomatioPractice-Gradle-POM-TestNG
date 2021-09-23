@@ -23,6 +23,19 @@ public class Utils {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    public void takeScreenShot() throws IOException {
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String time = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss-aa").format(new Date());
+        String fileWithPath = "./src/test/resources/screenshots/" + time + ".png";
+        File DestFile = new File(fileWithPath);
+        FileUtils.copyFile(screenshotFile, DestFile);
+    }
+
+    public String generateRandomEmail(int min, int max) {
+        double id = Math.random() * (max - min) + min;
+        return "test" + (int) id + "@test.com";
+
+    }
 
     private String email;
     private String password;
@@ -47,6 +60,14 @@ public class Utils {
         this.password = password;
     }
 
+    public void readJSONFile() throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        Object obj = jsonParser.parse(new FileReader("./src/test/resources/user.json"));
+        JSONObject userObj = (JSONObject) obj;
+        setEmail((String)userObj.get("email"));
+        setPassword((String)userObj.get("password"));
+    }
+
     public void readJSONArray(int pos) throws IOException, ParseException {
         String fileName = "./src/test/resources/users.json";
         JSONParser jsonParser = new JSONParser();
@@ -58,17 +79,5 @@ public class Utils {
         setPassword((String) jsonObj.get("password"));
     }
 
-    public void takeScreenShot() throws IOException {
-        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String time = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss-aa").format(new Date());
-        String fileWithPath = "./src/test/resources/screenshots/" + time + ".png";
-        File DestFile = new File(fileWithPath);
-        FileUtils.copyFile(screenshotFile, DestFile);
-    }
 
-    public String generateRandomEmail(int min, int max) {
-        double id = Math.random() * (max - min) + min;
-        return "test" + (int) id + "@test.com";
-
-    }
 }

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Setup {
     public WebDriver driver;
-    @BeforeTest(groups = "login")
+    @BeforeTest(groups = {"login","purchase_product"})
     public void setUp() throws IOException {
         ChromeOptions ops = new ChromeOptions();
         ops.addArguments("--headed");
@@ -36,7 +36,7 @@ public class Setup {
         }
 
     }
-    @AfterTest
+    @AfterTest(groups = "login")
     public void Logout() throws InterruptedException {
 //        driver.quit();
 
